@@ -1,10 +1,7 @@
 {
-  "description": "Update indicator for Arch Linux and GNOME Shell.\nCan support AUR or other distros by changing command used to check for and apply updates.", 
-  "name": "Arch Linux Updates Indicator",
+  "description": "Update indicator for SyphaxOS Linux.\n", 
+  "name": "SyphaxOS Linux Updates Notifier",
   "shell-version": [
-    "3.18",
-    "3.20",
-    "3.22",
     "3.24",
     "3.26"
   ], 

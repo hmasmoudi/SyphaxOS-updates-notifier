@@ -49,10 +49,10 @@ let CHECK_INTERVAL     = 60*60;   // 1h
 let NOTIFY             = false;
 let HOWMUCH            = 0;
 let TRANSIENT          = true;
-let UPDATE_CMD         = "gnome-terminal -e 'sh -c  \"sudo pacman -Syu ; echo Done - Press enter to exit; read\" '";
+let UPDATE_CMD         = "gnome-terminal -e 'su -c  \"pacman -Syu ; echo Done - Press enter to exit; read\" '";
 let CHECK_CMD          = "/usr/bin/checkupdates";
 let MANAGER_CMD        = "";
-let PACMAN_DIR         = "/var/lib/pacman/local";
+let PACMAN_DIR         = "/usr/var/lib/pacman/local";
 let STRIP_VERSIONS     = true;
 let AUTO_EXPAND_LIST   = 0;
 
@@ -82,7 +82,7 @@ const ArchUpdateIndicator = new Lang.Class({
 		this.parent(0.0, "ArchUpdateIndicator");
 		Gtk.IconTheme.get_default().append_search_path(Me.dir.get_child('icons').get_path());
 
-		this.updateIcon = new St.Icon({icon_name: "arch-unknown-symbolic", style_class: 'system-status-icon'});
+		this.updateIcon = new St.Icon({icon_name: "syphaxos-unknown-symbolic", style_class: 'system-status-icon'});
 
 		let box = new St.BoxLayout({ vertical: false, style_class: 'panel-status-menu-box' });
 		this.label = new St.Label({ text: '',
@@ -271,7 +271,7 @@ const ArchUpdateIndicator = new Lang.Class({
 
 	_showChecking: function(isChecking) {
 		if (isChecking == true) {
-			this.updateIcon.set_icon_name('arch-unknown-symbolic');
+			this.updateIcon.set_icon_name('syphaxos-unknown-symbolic');
 			this.checkNowMenuContainer.actor.visible = false;
 			this.checkingMenuItem.actor.visible = true;;
 		} else {
@@ -284,7 +284,7 @@ const ArchUpdateIndicator = new Lang.Class({
 		updatesCount = typeof updatesCount === 'number' ? updatesCount : UPDATES_PENDING;
 		if (updatesCount > 0) {
 			// Updates pending
-			this.updateIcon.set_icon_name('arch-updates-symbolic');
+			this.updateIcon.set_icon_name('syphaxos-updates-symbolic');
 			this._updateMenuExpander( true, Gettext.ngettext( "%d update pending", "%d updates pending", updatesCount ).format(updatesCount) );
 			this.updatesListMenuLabel.set_text( this._updateList.join("\n") );
 			this.label.set_text(updatesCount.toString());
@@ -318,15 +318,15 @@ const ArchUpdateIndicator = new Lang.Class({
 			this.label.set_text('');
 			if (updatesCount == -1) {
 				// Unknown
-				this.updateIcon.set_icon_name('arch-unknown-symbolic');
+				this.updateIcon.set_icon_name('syphaxos-unknown-symbolic');
 				this._updateMenuExpander( false, '' );
 			} else if (updatesCount == -2) {
 				// Error
-				this.updateIcon.set_icon_name('arch-error-symbolic');
+				this.updateIcon.set_icon_name('syphaxos-error-symbolic');
 				this._updateMenuExpander( false, _('Error') );
 			} else {
 				// Up to date
-				this.updateIcon.set_icon_name('arch-uptodate-symbolic');
+				this.updateIcon.set_icon_name('syphaxos-uptodate-symbolic');
 				this._updateMenuExpander( false, _('Up to date :)') );
 				UPDATES_LIST = []; // Reset stored list
 			}
@@ -422,7 +422,7 @@ const ArchUpdateIndicator = new Lang.Class({
 			// We have to prepare this only once
 			this._notifSource = new MessageTray.SystemNotificationSource();
 			this._notifSource.createIcon = function() {
-				return new St.Icon({ icon_name: 'arch-lit-symbolic' });
+				return new St.Icon({ icon_name: 'syphaxos-lit-symbolic' });
 			};
 			// Take care of note leaving unneeded sources
 			this._notifSource.connect('destroy', Lang.bind(this, function() {this._notifSource = null;}));

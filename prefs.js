@@ -42,7 +42,7 @@ function buildPrefsWidget(){
 	let box = buildable.get_object('prefs_widget');
 
 	let version_label = buildable.get_object('version_info');
-	version_label.set_text('[Arch-update v' + Me.metadata.version.toString() + ']');
+	version_label.set_text('[SyphaxOS-updates-notifier v' + Me.metadata.version.toString() + ']');
 
 	// Bind fields to settings
 	settings.bind('boot-wait' , buildable.get_object('field_wait') , 'value' , Gio.SettingsBindFlags.DEFAULT);
